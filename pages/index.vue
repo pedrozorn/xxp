@@ -1,9 +1,9 @@
 <template>
-  <Tutorial/>
+  <div class="toppage">test</div>
 </template>
 
-<script>
-export default {
-  name: 'IndexPage'
+<style lang="scss" scoped>
+.toppage {
+  font-size: 100px;
 }
-</script>
+</style>
