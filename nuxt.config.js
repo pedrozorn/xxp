@@ -18,7 +18,14 @@ export default {
 
   // Global CSS: https://go.nuxtjs.dev/config-css
   css: [
+    // '~/assets/scss/_mixin',
+    { src: '~/assets/scss/_mixin.scss' },
   ],
+  styleResources: {
+    scss: [
+      '~/assets/scss/_mixin.scss',
+    ]
+  },
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
   plugins: [
@@ -33,7 +40,22 @@ export default {
 
   // Modules: https://go.nuxtjs.dev/config-modules
   modules: [
+    'bootstrap-vue/nuxt',
+    '@nuxtjs/vuetify',
+    '@nuxtjs/style-resources',
   ],
+  //  追加
+  vuetify: {
+    theme: {
+      primary: '#03a9f4',
+      secondary: '#607d8b',
+      accent: '#9c27b0',
+      error: '#f44336',
+      warning: '#ffc107',
+      info: '#009688',
+      success: '#4caf50'
+    }
+  },
 
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {

@@ -1,9 +1,16 @@
-<template>
+<!-- <template>
   <div>
     <Header/>
-    <nuxt class="bg" />
+      <nuxt class="bg" />
     <Footer/>
   </div>
+</template> -->
+<template>
+  <v-app id="app" class="bgs">
+      <Header/>
+      <nuxt class="bg" />
+      <Footer/>
+    </v-app>
 </template>
 
 <style lang="scss" scoped>
