@@ -8,25 +8,27 @@
     color="secondary"
   >
   <v-tabs secondary>
-    <v-tabs-slider color="white"></v-tabs-slider>
-    <div class="header-icon">
-      <a href="">イメージ画像</a>
-    </div>
-    <div class="header-item-wrapper">
-      <v-tab>
-        <nuxt-link class="header-item" to="/">HOME</nuxt-link>
-      </v-tab>
-      <v-tab>
-        <nuxt-link class="header-item" to="/news">NEWS</nuxt-link>
-      </v-tab>
-      <v-tab>
-        <nuxt-link class="header-item" to="/movie">MOVIE</nuxt-link>
-      </v-tab>
-      <v-tab>
-        <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
-      </v-tab>
-    </div>
-  </v-tabs>
+      <div class="header-wrapper">
+        <div class="header-icon">
+          <a href="">イメージ画像</a>
+        </div>
+        <div class="header-items"> 
+          <v-tab>
+            <nuxt-link class="header-item" to="/">HOME</nuxt-link>
+          </v-tab>
+          <v-tab>
+            <nuxt-link class="header-item" to="/news">NEWS</nuxt-link>
+          </v-tab>
+          <v-tab>
+            <nuxt-link class="header-item" to="/movie">MOVIE</nuxt-link>
+          </v-tab>
+          <v-tab>
+            <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
+          </v-tab>
+        </div>
+      </div>
+      <v-tabs-slider color="white"></v-tabs-slider>
+    </v-tabs>
   <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
   <v-navigation-drawer
       app
@@ -62,13 +64,10 @@ export default {
 </script>
 
 <style lang="scss" scoped>
-.header-item-wrapper {
+.header-wrapper {
   display: flex;
   justify-content: space-between;
-  font-size: 1.5rem;
-}
-.header-link {
-  display: flex;
+  width: 100%;
 }
 
 .header-item {
@@ -76,9 +75,19 @@ export default {
   color: white;
 }
 
+.header-items {
+  display: flex;
+}
+
 v.toolbar_title {
   overflow: visible !important;
   margin-right: 50px !important;
+}
+
+.header-menu {
+  display: flex;
+  justify-content: flex-end;
+  font-size: 45px;
 }
 .v-app-bar__nav-icon {
   @include display_pc {
