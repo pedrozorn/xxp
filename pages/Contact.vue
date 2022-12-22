@@ -1,7 +1,7 @@
 <template>
   <form>
     <div class="flex justify-center contact-form">
-      <h2>Contact</h2>
+      <AppBackgroundHolder :title="title" />
       <v-text-field
         v-model="name"
         :error-messages="nameErrors"
@@ -69,6 +69,7 @@
       company: '',
       email: '',
       message: '',
+      title: 'Contact',
     }),
 
     computed: {
