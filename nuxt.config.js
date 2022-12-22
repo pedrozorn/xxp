@@ -43,7 +43,15 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/vuetify',
     '@nuxtjs/style-resources',
+    'nuxt-webfontloader'
   ],
+
+    // 追加
+    webfontloader: {
+      google: {
+        families: ['M+PLUS+1+Code:wght@100']
+      }
+    },
   //  追加
   vuetify: {
     theme: {

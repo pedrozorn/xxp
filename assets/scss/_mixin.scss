@@ -9,6 +9,9 @@ $tb-min: $xs + px;
 $tb-max: calc($sm - 1)px;
 $pc-min: $sm + px;
 
+// .application {
+//     font-family: 'M+PLUS+1+Code:wght@100', sans-serif;
+// }
 /* PC */
 @mixin display_pc {
     @media (min-width: $pc-min) {

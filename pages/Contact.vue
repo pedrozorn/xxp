@@ -2,6 +2,7 @@
   <form>
     <div class="flex justify-center contact-form">
       <AppBackgroundHolder :title="title" />
+      <h1 class="font-test">test</h1>
       <v-text-field
         v-model="name"
         :error-messages="nameErrors"
@@ -125,5 +126,9 @@
 }
 .message-area {
   padding-bottom: 1rem;
+}
+
+.font-test {
+  font-family: 'M+PLUS+1+Code:wght@100', sans-serif;
 }
 </style>
