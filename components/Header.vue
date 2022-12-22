@@ -1,56 +1,56 @@
 <template>
-<div>
-  <v-app-bar
-    app
-    fixed
-    elevate-on-scroll
-    dark
-    color="secondary"
-  >
-  <v-tabs secondary>
-      <div class="header-wrapper">
-        <div class="header-icon">
-          <a href="">イメージ画像</a>
-        </div>
-        <div class="header-items"> 
-          <v-tab>
-            <nuxt-link class="header-item" to="/">HOME</nuxt-link>
-          </v-tab>
-          <v-tab>
-            <nuxt-link class="header-item" to="/news">NEWS</nuxt-link>
-          </v-tab>
-          <v-tab>
-            <nuxt-link class="header-item" to="/movie">MOVIE</nuxt-link>
-          </v-tab>
-          <v-tab>
-            <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
-          </v-tab>
-        </div>
-      </div>
-      <v-tabs-slider color="white"></v-tabs-slider>
-    </v-tabs>
-  <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-  <v-navigation-drawer
+  <div class="header">
+    <v-app-bar
       app
-      dark
-      class="header-menu"
-      v-model="drawer"
       fixed
-      temporary
-      cliped-right
+      elevate-on-scroll
+      dark
+      color="secondary"
     >
-      <v-list classnav dense>
-        <v-list-item-group>
-          <v-list-item
-          >
-            <v-list-item-title>HOME</v-list-item-title>
-            <v-list-item-title>MOVIE</v-list-item-title>
-          </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
-  </v-app-bar>
-</div>
+    <v-tabs secondary>
+        <div class="header-wrapper">
+          <div class="header-icon">
+            <a href="">イメージ画像</a>
+          </div>
+          <div class="header-items"> 
+            <v-tab>
+              <nuxt-link class="header-item" to="/">HOME</nuxt-link>
+            </v-tab>
+            <v-tab>
+              <nuxt-link class="header-item" to="/news">NEWS</nuxt-link>
+            </v-tab>
+            <v-tab>
+              <nuxt-link class="header-item" to="/movie">MOVIE</nuxt-link>
+            </v-tab>
+            <v-tab>
+              <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
+            </v-tab>
+          </div>
+        </div>
+        <v-tabs-slider color="white"></v-tabs-slider>
+      </v-tabs>
+    <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-navigation-drawer
+        app
+        dark
+        class="header-menu"
+        v-model="drawer"
+        fixed
+        temporary
+        cliped-right
+      >
+        <v-list classnav dense>
+          <v-list-item-group>
+            <v-list-item
+            >
+              <v-list-item-title>HOME</v-list-item-title>
+              <v-list-item-title>MOVIE</v-list-item-title>
+            </v-list-item>
+          </v-list-item-group>
+        </v-list>
+      </v-navigation-drawer>
+    </v-app-bar>
+  </div>
 </template>
 <script>
 
@@ -64,6 +64,9 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+.header {
+  padding-bottom: 56px;
+}
 .header-wrapper {
   display: flex;
   justify-content: space-between;
