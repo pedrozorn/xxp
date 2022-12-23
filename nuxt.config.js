@@ -49,7 +49,7 @@ export default {
     // 追加
     webfontloader: {
       google: {
-        families: ['M+PLUS+1+Code:wght@100']
+        families: ['M+PLUS+1+Code']
       }
     },
   //  追加

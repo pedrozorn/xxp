@@ -3,7 +3,7 @@
     <v-container fluid fill-height class="background-holder__content">
       <v-row>
         <v-col class="background-holder__content-text">
-          <p>{{ title }}</p>
+          <p class="page-title">{{ title }}</p>
         </v-col>
       </v-row>
     </v-container>
@@ -53,5 +53,12 @@ export default {
       font-size: 40px;
     }
   }
+}
+.page-title {
+  max-width: 100%;
+  font-family: 'M PLUS 1 Code', sans-serif;
+  font-weight: 900;
+  font-size: 4rem;
+  margin: auto;
 }
 </style>
