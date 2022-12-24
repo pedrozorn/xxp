@@ -25,6 +25,9 @@
             <v-tab>
               <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
             </v-tab>
+            <v-tab>
+              <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
+            </v-tab>
           </div>
         </div>
         <v-tabs-slider color="white"></v-tabs-slider>

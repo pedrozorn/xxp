@@ -43,8 +43,17 @@ export default {
     'bootstrap-vue/nuxt',
     '@nuxtjs/vuetify',
     '@nuxtjs/style-resources',
-    'nuxt-webfontloader'
+    'nuxt-webfontloader',
   ],
+
+  buildModules: ["nuxt-microcms-module"],
+  microcms: {
+    options: {
+      serviceDomain: process.env.SERVICE_DOMAIN,
+      apiKey: process.env.API_KEY,
+    },
+    mode: process.env.NODE_ENV === "production" ? "server" : "all",
+  },
 
     // 追加
     webfontloader: {
