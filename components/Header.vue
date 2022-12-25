@@ -1,3 +1,5 @@
+
+
 <template>
   <div class="header">
     <v-app-bar
@@ -10,24 +12,14 @@
     <v-tabs secondary>
         <div class="header-wrapper">
           <div class="header-icon">
-            <a href="">イメージ画像</a>
+            <a href="/">イメージ画像</a>
           </div>
           <div class="header-items"> 
-            <v-tab>
-              <nuxt-link class="header-item" to="/">HOME</nuxt-link>
-            </v-tab>
-            <v-tab>
-              <nuxt-link class="header-item" to="/news">NEWS</nuxt-link>
-            </v-tab>
-            <v-tab>
-              <nuxt-link class="header-item" to="/movie">MOVIE</nuxt-link>
-            </v-tab>
-            <v-tab>
-              <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
-            </v-tab>
-            <v-tab>
-              <nuxt-link class="header-item" to="/contact">CONTACT</nuxt-link>
-            </v-tab>
+            <v-tab class="header-item" to="/">HOME</v-tab>
+            <v-tab class="header-item" to="/news">NEWS</v-tab>
+            <v-tab class="header-item" to="/movie">MOVIE</v-tab>
+            <v-tab class="header-item" to="/testcontact">TESTCONTACT</v-tab>
+            <v-tab class="header-item" to="/contact">CONTACTs</v-tab>
           </div>
         </div>
         <v-tabs-slider color="white"></v-tabs-slider>
@@ -56,7 +48,6 @@
   </div>
 </template>
 <script>
-
 export default {
   data() {
     return {
@@ -75,21 +66,17 @@ export default {
   justify-content: space-between;
   width: 100%;
 }
-
 .header-item {
   text-decoration: none;
   color: white;
 }
-
 .header-items {
   display: flex;
 }
-
 v.toolbar_title {
   overflow: visible !important;
   margin-right: 50px !important;
 }
-
 .header-menu {
   display: flex;
   justify-content: flex-end;
@@ -100,13 +87,10 @@ v.toolbar_title {
     display: none !important;
   }
 }
-
 .v-tabs {
   display: none;
-
   @include display_pc {
     display: block !important;
   }
 }
-
 </style>

@@ -1,7 +1,6 @@
 <template>
   <form>
     <AppBackgroundHolder :title="title" />
-    <h1>{{ data }}</h1>
     <div class="flex justify-center contact-form">
       <v-text-field v-model="name" :error-messages="nameErrors" :counter="10" label="お名前 ※必須" required
         @input="$v.name.$touch()" @blur="$v.name.$touch()"></v-text-field>
@@ -11,10 +10,10 @@
         @blur="$v.email.$touch()"></v-text-field>
       <v-textarea class="message-area" v-model="message" :counter="1000" label="お問合せ内容" required
         @input="$v.message.$touch()" @blur="$v.message.$touch()"></v-textarea>
-      <v-btn class="mr-4" @click="sendMessage">
+      <v-btn class="mr-4" @click="submit">
         submit
       </v-btn>
-      <v-btn @click="asyncData">
+      <v-btn @click="clear">
         clear
       </v-btn>
     </div>
@@ -36,11 +35,11 @@ export default {
   },
 
   data: () => ({
+    title: 'Contact',
     name: '',
     company: '',
     email: '',
     message: '',
-    title: 'Contact',
     item: '',
     sample: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
   }),
@@ -80,12 +79,14 @@ export default {
       this.email = ''
       this.message = ''
     },
-    async asyncData({ $microcms }) {
-    const data = await $microcms.get({
-      endpoint: 'contact',
-    });
-    return { data };
-  },
+    // async handleSubmit() {
+    //   await axios.post('https://xxxx.microcms.io/api/v1/contact', this.postData, {
+    //     headers: {
+    //       'Content-Type': 'application/json',
+    //       'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY 
+    //     },
+    //   })
+    // },
   }
 }
 </script>
