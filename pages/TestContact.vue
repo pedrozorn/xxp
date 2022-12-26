@@ -10,7 +10,7 @@
         @blur="$v.email.$touch()"></v-text-field>
       <v-textarea class="message-area" v-model="message" :counter="1000" label="お問合せ内容" required
         @input="$v.message.$touch()" @blur="$v.message.$touch()"></v-textarea>
-      <v-btn class="mr-4" @click="submit">
+      <v-btn class="mr-4" @click="asyncData">
         submit
       </v-btn>
       <v-btn @click="clear">
@@ -23,6 +23,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
+
 
 export default {
   mixins: [validationMixin],
@@ -42,6 +43,13 @@ export default {
     message: '',
     item: '',
     sample: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+    postData: {
+          name: 'aa',
+          company: 'aa',
+          email: 'aa',
+          message: 'azaa',
+    },
+      
   }),
 
   computed: {
@@ -79,14 +87,53 @@ export default {
       this.email = ''
       this.message = ''
     },
-    // async handleSubmit() {
-    //   await axios.post('https://xxxx.microcms.io/api/v1/contact', this.postData, {
+    
+    //   await axios.post('https://xxxx.microcms.io/api/v1/contact',
+    //     this.postData
+    //     , {
     //     headers: {
     //       'Content-Type': 'application/json',
-    //       'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY 
+    //       'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY
     //     },
     //   })
     // },
+    // async postData() {
+    //   const res = this.$axios.post('https://xxxx.microcms.io/api/v1/contact',
+    //     postData,
+    //             headers: {
+    //       'Content-Type': 'application/json',
+    //       'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY
+    //     },
+
+
+    //   ).catch(err => {
+    //     return error.response
+    //     }
+    //   )
+    // }
+    async postTest() {
+      const param = {
+        content: this.postData,
+        headers: {
+          'Content-Type': 'application/json',
+          'X-MICROCMS-API-KEY': process.env.MICROCMS_API_KEY
+        },
+      }
+      const res = this.$axios.post('https://xxxx.microcms.io/api/v1/contact',param
+      ).catch(err => {
+        return error.response
+        }
+      )
+    },
+
+    async asyncData({ $microcms }) {
+      const data = await $microcms.post({
+        endpoint: 'contact',
+        content: this.postData,
+      });
+      return { data };
+    }
+
   }
 }
 </script>
