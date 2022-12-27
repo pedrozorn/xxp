@@ -80,5 +80,7 @@ export default {
       compact: true,
     },
     // hardSource: true,
-  }
+    
+  },
+  target: 'static'
 }
