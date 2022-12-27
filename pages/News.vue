@@ -1,27 +1,26 @@
 <template>
   <div>
-    <pre>{{ data }}</pre>
+    <p>news</p>
   </div>
 </template>
 
 <script>
+// export default {
+//   data: () => ({
+//     name: '',
+//     company: '',
+//     email: '',
+//     message: '',
+//     title: 'Contact',
+//     contents: '',
+//     sample: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
+//   }),
 
-export default {
-  data: () => ({
-    name: '',
-    company: '',
-    email: '',
-    message: '',
-    title: 'Contact',
-    contents: '',
-    sample: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-  }),
-
-  async asyncData({ $microcms }) {
-    const data = await $microcms.get({
-      endpoint: 'contact',
-    });
-    return { data };
-  }
-}
+//   async asyncData({ $microcms }) {
+//     const data = await $microcms.get({
+//       endpoint: 'contact',
+//     });
+//     return { data };
+//   }
+// }
 </script>
