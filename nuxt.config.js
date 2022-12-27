@@ -82,5 +82,6 @@ export default {
     // hardSource: true,
     
   },
+  ssr: false,
   target: 'static'
 }
