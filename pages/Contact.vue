@@ -11,7 +11,7 @@
             @blur="$v.email.$touch()"></v-text-field>
           <v-textarea class="message-area" v-model="message" :counter="1000" label="お問合せ内容" required
             @input="$v.message.$touch()" @blur="$v.message.$touch()"></v-textarea>
-          <v-btn class="mr-4" @click="encode">
+          <v-btn class="mr-4" @click="handleSubmit">
             submit
           </v-btn>
           <v-btn @click="clear">
