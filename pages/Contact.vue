@@ -6,22 +6,36 @@
     <form class="Form" name="contact" method="POST" data-netlify="true" @submit.prevent>
       <div class="Form-Item">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>お名前</p>
-        <input v-model="form.name" type="text" class="Form-Item-Input" placeholder="例）山田太郎">
+        <input v-model="form.name" type="text" class="Form-Item-Input" placeholder="氏名">
       </div>
       <div class="Form-Item">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
-        <input v-model="form.email" type="email" class="Form-Item-Input" placeholder="例）example@gmail.com">
+        <input v-model="form.email" type="email" class="Form-Item-Input" placeholder="メールアドレス">
+      </div>
+      <div class="Form-Item">
+        <p class="Form-Item-Label">会社名</p>
+        <input v-model="form.text" type="text" class="Form-Item-Input" placeholder="会社名">
       </div>
       <div class="Form-Item">
         <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>お問い合わせ内容</p>
         <textarea v-model="form.content" class="Form-Item-Textarea"></textarea>
       </div>
-      <input type="submit" class="Form-Btn" value="送信する"  @click="handleSubmit">
+      <input type="submit" class="Form-Btn" value="送信"  @click="handleSubmit">
     </form>
   </template>
     <template v-else>
-      <p v-text="'お問い合わせ頂きありがとうございました。'" />
-      <p><nuxt-link to="/" v-text="'TOPへ'" /></p>
+      <div class="flex justify-center contact-form">
+          <br>
+          お問い合わせいただきありがとうございました。<br>
+          お問い合わせを受け付けました。            
+          <br>
+          <br>
+          折り返し、担当者よりご連絡いたしますので、
+          恐れ入りますが、しばらくお待ちください。
+          <br>
+          <br><br>一週間以内に連絡がなかった場合大変お手数ですが、再度お問い合わせの手続きをお願い致します。
+          </p>
+      </div>
     </template>
   </div>
   </section>
@@ -36,7 +50,8 @@ export default {
       form: {
         name: '',
         email: '',
-        content: ''
+        company: '',
+        content: '',
       },
       finished: false
     }
@@ -69,7 +84,7 @@ export default {
   }
 }
 </script>
-<style>
+<style lang="scss" scoped>
 .contact-form {
   margin-left: auto;
   margin-right: auto;
@@ -86,7 +101,7 @@ export default {
 }
 
 .Form {
-  margin-top: 80px;
+  margin-top: 0px;
   margin-left: auto;
   margin-right: auto;
   max-width: 720px;
@@ -207,18 +222,37 @@ export default {
 }
 .Form-Btn {
   border-radius: 6px;
-  margin-top: 32px;
+  margin-top: 15px;
   margin-left: auto;
   margin-right: auto;
-  padding-top: 20px;
-  padding-bottom: 20px;
-  width: 280px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  width: 90px;
   display: block;
   letter-spacing: 0.05em;
   background: #545454;
   color: #fff;
   font-weight: bold;
   font-size: 20px;
+  // border-radius: 4px;
+  //   padding-top: 4px;
+  //   padding-bottom: 4px;
+  //   width: 32px;
+  //   font-size: 10px;
+
+  // border-radius: 6px;
+  // margin-top: 32px;
+  // margin-left: auto;
+  // margin-right: auto;
+  // padding-top: 20px;
+  // padding-bottom: 20px;
+  // width: 280px;
+  // display: block;
+  // letter-spacing: 0.05em;
+  // background: #545454;
+  // color: #fff;
+  // font-weight: bold;
+  // font-size: 20px;
 }
 @media screen and (max-width: 480px) {
   .Form-Btn {

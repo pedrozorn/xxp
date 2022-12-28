@@ -52,17 +52,6 @@ export default {
       pageSize: 2,
     };
   },
-  async asyncData({ $microcms }) {
-    const contents = await $microcms.get({
-      endpoint: 'movie',
-    });
-    console.log(contents)
-    const data = contents.contents
-
-    return {
-      data
-    };
-  },
   methods: {
     getNumber: function (number) {
       console.log(number);
