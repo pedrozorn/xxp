@@ -35,22 +35,17 @@ export default {
     message: { maxLength: maxLength(1000) },
   },
 
-  data: () => ({
-    title: 'Contact',
-    name: '',
-    company: '',
-    email: '',
-    message: '',
-    item: '',
-    sample: 'aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa',
-    postData: {
-          name: 'aa',
-          company: 'aa',
-          email: 'aa',
-          message: 'azaa',
-    },
-      
-  }),
+  data() {
+    return {
+      title: 'Contact',
+      form: {
+        name: '',
+        email: '',
+        content: ''
+      },
+      finished: false
+    }
+  },
 
   computed: {
     nameErrors() {
