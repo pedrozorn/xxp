@@ -2,27 +2,23 @@
   <section class="contact-container">
     <AppBackgroundHolder :title="title" />
     <div class="flex justify-center contact-form">
-    <template v-if="!finished">
-  <form class="Form" name="contact" method="POST" data-netlify="true" @submit.prevent>
-    <div class="Form-Item">
-      <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>お名前</p>
-      <input type="text" class="Form-Item-Input" placeholder="例）山田太郎">
-    </div>
-    <div class="Form-Item">
-      <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>電話番号</p>
-      <input type="text" class="Form-Item-Input" placeholder="例）000-0000-0000">
-    </div>
-    <div class="Form-Item">
-      <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
-      <input type="email" class="Form-Item-Input" placeholder="例）example@gmail.com">
-    </div>
-    <div class="Form-Item">
-      <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>お問い合わせ内容</p>
-      <textarea class="Form-Item-Textarea"></textarea>
-    </div>
-    <input type="submit" class="Form-Btn" value="送信する"  @click="handleSubmit">
-  </form>
-    </template>
+  <template v-if="!finished">
+    <form class="Form" name="contact" method="POST" data-netlify="true" @submit.prevent>
+      <div class="Form-Item">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>お名前</p>
+        <input v-model="form.name" type="text" class="Form-Item-Input" placeholder="例）山田太郎">
+      </div>
+      <div class="Form-Item">
+        <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
+        <input v-model="form.email" type="email" class="Form-Item-Input" placeholder="例）example@gmail.com">
+      </div>
+      <div class="Form-Item">
+        <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>お問い合わせ内容</p>
+        <textarea v-model="form.content" class="Form-Item-Textarea"></textarea>
+      </div>
+      <input type="submit" class="Form-Btn" value="送信する"  @click="handleSubmit">
+    </form>
+  </template>
     <template v-else>
       <p v-text="'お問い合わせ頂きありがとうございました。'" />
       <p><nuxt-link to="/" v-text="'TOPへ'" /></p>
@@ -31,21 +27,9 @@
   </section>
 </template>
 <script>
-import { validationMixin } from 'vuelidate'
-import { required, maxLength, email } from 'vuelidate/lib/validators'
-
 import axios from 'axios'
+
 export default {
-  mixins: [validationMixin],
-
-  validations: {
-    name: { required, maxLength: maxLength(10) },
-    company: { maxLength: maxLength(30) },
-    email: { required, email },
-    message: { maxLength: maxLength(1000) },
-  },
-
-
   data() {
     return {
       title: 'Contact',
@@ -57,43 +41,7 @@ export default {
       finished: false
     }
   },
-
-  computed: {
-    nameErrors() {
-      const errors = []
-      if (!this.$v.name.$dirty) return errors
-      !this.$v.name.maxLength && errors.push('名前が長すぎます。10文字以内で入力してください。')
-      !this.$v.name.required && errors.push('必須項目です.')
-      return errors
-    },
-    companyErrors() {
-      const errors = []
-      if (!this.$v.company.$dirty) return errors
-      !this.$v.company.maxLength && errors.push('会社名')
-      return errors
-    },
-    emailErrors() {
-      const errors = []
-      if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('Must be valid e-mail')
-      !this.$v.email.required && errors.push('E-mail is required')
-      return errors
-    },
-  },
-
-
   methods: {
-    submit() {
-      this.$v.$touch()
-      this.clear()
-    },
-    clear() {
-      this.$v.$reset()
-      this.name = ''
-      this.company = ''
-      this.email = ''
-      this.message = ''
-    },
     encode(data) {
       return Object.keys(data)
         .map(
