@@ -30,7 +30,7 @@
           v-model="page"
           :length="length"
           @input="pageChange"
-        ></v-pagination>
+        ></v-pagination>  
       </v-container>
     </div>
   </div>

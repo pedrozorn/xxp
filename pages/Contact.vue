@@ -6,9 +6,9 @@
     <form class="Form" name="contact" method="POST" data-netlify="true" @submit.prevent>
       <div class="Form-Item">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>お名前</p>
-        <input v-model="name" type="text" class="Form-Item-Input" placeholder="氏名">
+        <input v-model="form.name" type="text" class="Form-Item-Input" placeholder="氏名">
         <v-row>
-          <div v-for="(error, index) in v$.name.$errors" :key="index" class="text-xs text-red-500 mb-2">
+          <div v-for="(error, index) in v$.testEmail.$errors" :key="index" class="text-xs text-red-500 mb-2">
             <div v-if="error.$validator == 'required'">必須入力です。</div>
             <div v-if="error.$validator == 'maxLength'">文字数が多すぎます。200文字以内で入力してください。</div>
           </div>
@@ -16,15 +16,15 @@
       </div>
       <div class="Form-Item">
         <p class="Form-Item-Label"><span class="Form-Item-Label-Required">必須</span>メールアドレス</p>
-        <input v-model="email" type="email" class="Form-Item-Input" placeholder="メールアドレス">
+        <input v-model="form.email" type="email" class="Form-Item-Input" placeholder="メールアドレス">
       </div>
       <div class="Form-Item">
         <p class="Form-Item-Label">会社名</p>
-        <input v-model="company" type="text" class="Form-Item-Input" placeholder="会社名">
+        <input v-model="form.text" type="text" class="Form-Item-Input" placeholder="会社名">
       </div>
       <div class="Form-Item">
         <p class="Form-Item-Label isMsg"><span class="Form-Item-Label-Required">必須</span>お問い合わせ内容</p>
-        <textarea v-model="content" class="Form-Item-Textarea"></textarea>
+        <textarea v-model="form.content" class="Form-Item-Textarea"></textarea>
       </div>
       <input type="submit" class="Form-Btn" value="送信"  @click="validateTest">
     </form>
@@ -62,43 +62,45 @@ export default {
       //   company: '',
       //   content: '',
       // },
-      
       name: '',
       email: '',
       company: '',
       content: '',
-      
+
+      form: {
+        name: this.name,
+        email: this.email,
+        company: this.company,
+        content: this.content,
+      },
+
       finished: false
     }
   },
     setup() {
-    const name = ref('')
-    const email = ref('')
-    const company = ref('')
-    const content = ref('')
+    const testEmail = ref('')
+    const testMaxLength = ref('')
+    const testRequired = ref('')
 
     const rules = {
-      name: { required, minLength: maxLength(3) },
-      email: { required, email },
-      company: { maxLength: maxLength(30) },
-      content: { required, minLength: minLength(200) },
+      testEmail: { email },
+      testMaxLength: { maxLength: maxLength(3) },
+      testRequired: { required },
     }
-    
-    const v$ = useVuelidate(rules, { name, email, company,content})
+
+    const v$ = useVuelidate(rules, { testEmail, testMaxLength, testRequired,})
 
     const validateTest = async () => {
       const isFormCorrect = await v$.value.$validate()
-      // console.log(form);
-      // if (!isFormCorrect) return
+      if (!isFormCorrect) return
       handleSubmit;
       // バリデーションエラーじゃない場合にやりたい処理
     }
 
     return {
-      name,
-      email,
-      company,
-      content,
+      testEmail,
+      testMaxLength,
+      testRequired,
       validateTest,
       v$
     }
@@ -112,36 +114,21 @@ export default {
         .join('&')
     },
     handleSubmit() {
-      const form =  {
-        name: name,
-        email: email,
-        company: company,
-        content: content,
+      const axiosConfig = {
+        header: { 'Content-Type': 'applicati`on/x-www-form-urlencoded' }
       }
-      console.log(form);
-
-            // form: {
-      //   name: '',
-      //   email: '',
-      //   company: '',
-      //   content: '',
-      // },
-      return;
-      // const axiosConfig = {
-      //   header: { 'Content-Type': 'application/x-www-form-urlencoded' }
-      // }
-      // axios
-      //   .post(
-      //     '/',
-      //     this.encode({
-      //       'form-name': 'contact',
-      //       ...this.form
-      //     }),
-      //     axiosConfig
-      //   )
-      //   .then(() => {
-      //     this.finished = true
-      //   })
+      axios
+        .post(
+          '/',
+          this.encode({
+            'form-name': 'contact',
+            ...this.form
+          }),
+          axiosConfig
+        )
+        .then(() => {
+          this.finished = true
+        })
     }
   }
 }
