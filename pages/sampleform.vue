@@ -88,7 +88,7 @@ export default {
     const content = ref('')
 
     const rules = {
-      testName: { email, },
+      testName: { email, maxLength: maxLength(3)  },
       maxLength: { maxLength: maxLength(3) },
       required: { required },
     }

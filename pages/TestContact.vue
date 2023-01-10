@@ -8,9 +8,9 @@
         @input="$v.company.$touch()" @blur="$v.company.$touch()"></v-text-field>
       <v-text-field v-model="email" :error-messages="emailErrors" label="メールアドレス" required @input="$v.email.$touch()"
         @blur="$v.email.$touch()"></v-text-field>
-      <v-textarea class="message-area" v-model="message" :counter="1000" label="お問合せ内容" required
-        @input="$v.message.$touch()" @blur="$v.message.$touch()"></v-textarea>
-      <v-btn class="mr-4" @click="asyncData">
+      <v-textarea class="message-area" v-model="content" :counter="1000" label="お問合せ内容" required
+        @input="$v.content.$touch()" @blur="$v.content.$touch()"></v-textarea>
+      <v-btn class="mr-4 disable-btn-color" :disabled="$v.$invalid" @click="handleSubmit">
         submit
       </v-btn>
       <v-btn @click="clear">
@@ -23,7 +23,7 @@
 <script>
 import { validationMixin } from 'vuelidate'
 import { required, maxLength, email } from 'vuelidate/lib/validators'
-
+import axios from 'axios'
 
 export default {
   mixins: [validationMixin],
@@ -32,17 +32,16 @@ export default {
     name: { required, maxLength: maxLength(10) },
     company: { maxLength: maxLength(30) },
     email: { required, email },
-    message: { maxLength: maxLength(1000) },
+    content: { maxLength: maxLength(1000) },
   },
 
   data() {
     return {
       title: 'Contact',
-      form: {
-        name: '',
-        email: '',
-        content: ''
-      },
+      name: '',
+      company: '',
+      email: '',
+      content: '',
       finished: false
     }
   },
@@ -64,7 +63,7 @@ export default {
     emailErrors() {
       const errors = []
       if (!this.$v.email.$dirty) return errors
-      !this.$v.email.email && errors.push('Must be valid e-mail')
+      // !this.$v.email.email && errors.push('Must be valid e-mail')
       !this.$v.email.required && errors.push('E-mail is required')
       return errors
     },
@@ -81,6 +80,38 @@ export default {
       this.company = ''
       this.email = ''
       this.message = ''
+    },
+    encode(data) {
+      return Object.keys(data)
+        .map(
+          (key) => `${encodeURIComponent(key)}=${encodeURIComponent(data[key])}`
+        )
+        .join('&')
+    },
+    handleSubmit() {
+      const form = {
+        name: this.name,
+        company: this.company,
+        email: this.email,
+        content: this.content,
+      }
+      console.log(form)
+      const axiosConfig = {
+        header: { 'Content-Type': 'application/x-www-form-urlencoded' }
+      }
+      axios
+        .post(
+          '/',
+          this.encode({
+            'form-name': 'contact',
+            ...form
+          }),
+          axiosConfig
+        )
+        .then(() => {
+          this.finished = true
+        })
+        console.log("test2")
     },
     
     //   await axios.post('https://xxxx.microcms.io/api/v1/contact',
@@ -149,4 +180,8 @@ export default {
   font-family: 'M PLUS 1 Code', sans-serif;
   font-weight: 900;
 }
+// .disable-btn-color {
+//   background-color: rgba(0, 0, 0, 0.12) !important;
+//   color: rgba(0, 0, 0, 0.26) !important;
+// }
 </style>
