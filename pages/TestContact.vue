@@ -2,20 +2,35 @@
   <form>
     <AppBackgroundHolder :title="title" />
     <div class="flex justify-center contact-form">
-      <v-text-field v-model="name" :error-messages="nameErrors" :counter="10" label="お名前 ※必須" required
-        @input="$v.name.$touch()" @blur="$v.name.$touch()"></v-text-field>
-      <v-text-field v-model="company" :error-messages="companyErrors" :counter="30" label="会社名"
-        @input="$v.company.$touch()" @blur="$v.company.$touch()"></v-text-field>
-      <v-text-field v-model="email" :error-messages="emailErrors" label="メールアドレス" required @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"></v-text-field>
-      <v-textarea class="message-area" v-model="content" :counter="1000" label="お問合せ内容" required
-        @input="$v.content.$touch()" @blur="$v.content.$touch()"></v-textarea>
-      <v-btn class="mr-4 disable-btn-color" :disabled="$v.$invalid" @click="handleSubmit">
-        submit
-      </v-btn>
-      <v-btn @click="clear">
-        clear
-      </v-btn>
+      <template v-if="!finished">
+        <v-text-field v-model="name" :error-messages="nameErrors" :counter="10" label="お名前 ※必須" required
+          @input="$v.name.$touch()" @blur="$v.name.$touch()"></v-text-field>
+        <v-text-field v-model="company" :error-messages="companyErrors" :counter="30" label="会社名"
+          @input="$v.company.$touch()" @blur="$v.company.$touch()"></v-text-field>
+        <v-text-field v-model="email" :error-messages="emailErrors" label="メールアドレス" required @input="$v.email.$touch()"
+          @blur="$v.email.$touch()"></v-text-field>
+        <v-textarea class="message-area" v-model="content" :counter="1000" label="お問合せ内容" required
+          @input="$v.content.$touch()" @blur="$v.content.$touch()"></v-textarea>
+        <v-btn class="mr-4 disable-btn-color" :disabled="$v.$invalid" @click="handleSubmit">
+          submit
+        </v-btn>
+        <v-btn @click="clear">
+          clear
+        </v-btn>
+      </template>
+
+      <template v-else>
+        <div class="flex justify-center contact-form">
+            <br>
+            お問い合わせいただきありがとうございました。<br>
+            お問い合わせを受け付けました。            
+            <br>
+            <br>
+            折り返し、担当者よりご連絡いたしますので、
+            恐れ入りますが、しばらくお待ちください。
+            <br>
+        </div>
+      </template>
     </div>
   </form>
 </template>
